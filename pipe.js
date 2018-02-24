@@ -1,10 +1,21 @@
 class Pipe {
 
     constructor() {
-      this.top = random(height/2);
-      this.bottom = random(height/2);
+
+      // ou seja a altura é dividida em 4 partes, sendo que o espaço ficara sempre nos quadrantes centrais do canvas
+      let randomValue = Math.floor(Math.random() * (height * (3/4) - height * (1/4))) + (height * (1/4));
+      this.space = 130;
+      
+      if(randomValue + this.space >= height){
+        this.top = randomValue - this.space;
+        this.bottom = height - randomValue;
+      } else {
+        this.top = randomValue;
+        this.bottom = height - (randomValue + this.space);
+      }
+
       this.x = width;
-      this.w = 20;
+      this.w = 30;
       this.speed = 2;
     
       this.highlight = false;
@@ -22,7 +33,7 @@ class Pipe {
     }
   
     show() {
-      fill(255);
+      fill(0,160,68);
       if (this.highlight) {
         fill(255, 0, 0);
       }

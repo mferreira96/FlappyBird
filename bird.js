@@ -10,7 +10,7 @@ class Bird {
     }
 
     show() {
-      fill(255);
+      fill(255,255,0);
       ellipse(this.x, this.y, 32, 32);
     }
   

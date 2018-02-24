@@ -3,7 +3,7 @@ var bird;
 var pipes = [];
 
 function setup() {
-  createCanvas(400, 600);
+  createCanvas(windowWidth,windowHeight);
   bird = new Bird();
   pipes.push(new Pipe());
 }
@@ -11,7 +11,7 @@ function setup() {
 
 // onde devem chamar as funcoes para desenhar e atualizar
 function draw() {
-  background(0);
+  background(0,133,227);
 
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
