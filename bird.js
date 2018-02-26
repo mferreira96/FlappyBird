@@ -3,7 +3,9 @@ class Bird {
     constructor(){
       this.y = height/2;
       this.x = 64;
-    
+      this.diameter = 32
+      this.radius = this.diameter / 2;
+
       this.gravity = 0.6;
       this.lift = -15;
       this.velocity = 0;
@@ -11,7 +13,7 @@ class Bird {
 
     show() {
       fill(255,255,0);
-      ellipse(this.x, this.y, 32, 32);
+      ellipse(this.x, this.y, this.diameter, this.diameter);
     }
   
     up() {

@@ -16,20 +16,43 @@ class Pipe {
 
       this.x = width;
       this.w = 30;
-      this.speed = 2;
+      this.speed = 2;  
     
       this.highlight = false;
     }
+  
 
     hits(bird) {
+      // hits on the left wall
+      if (this.inside(this.x, this.top, bird) || this.inside(this.x + this.w, this.top, bird)) {
+        // hits on the corners of the top pipe
+        this.highlight = true;
+      } else if (this.inside(this.x, height - this.bottom, bird) || this.inside(this.x + this.w, height - this.bottom, bird)){
+        // hits on the corners of the bottom pipe
+        this.highlight = true;
+      } else if (bird.y - bird.radius <= this.top || bird.y + bird.radius >= height - this.bottom){
+        if(bird.x + bird.radius >= this.x && bird.x + bird.radius <= this.x + this.w)
+          this.highlight = true;
+      }
+       else {
+        this.highlight = false;
+      }
+/*
       if (bird.y < this.top || bird.y > height - this.bottom) {
         if (bird.x > this.x && bird.x < this.x + this.w) {
           this.highlight = true;
           return true;
         }
       }
+
       this.highlight = false;
       return false;
+  */
+
+      if(this.highlight)
+        return true;
+      else 
+        return false;  
     }
   
     show() {
@@ -52,5 +75,11 @@ class Pipe {
         return false;
       }
     }
-  
+    
+    inside(x, y, bird) {
+      if ( (x - bird.x) ** 2 + (y - bird.y) ** 2 <= bird.radius ** 2)
+        return true;
+      else
+        return false;
+    }
   }
