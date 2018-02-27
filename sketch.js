@@ -3,11 +3,17 @@ var bird;
 var pipes = [];
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  var canvas = createCanvas(windowWidth,windowHeight);
+  canvas.parent('game_screen'); //set his parent
+
+
   bird = new Bird();
   pipes.push(new Pipe());
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 
 // onde devem chamar as funcoes para desenhar e atualizar
 function draw() {

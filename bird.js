@@ -25,16 +25,20 @@ class Bird {
       this.velocity *= 0.9;
       this.y += this.velocity;
   
-      if (this.y > height) {
-        this.y = height;
+      if (this.y + this.radius > height) {
+        this.y = height - this.radius;
         this.velocity = 0;
       }
   
-      if (this.y < 0) {
-        this.y = 0;
+      if (this.y  - this.radius < 0) {
+        this.y = this.radius;
         this.velocity = 0;
       }
   
+    }
+
+    dead() {
+
     }
   
   }
