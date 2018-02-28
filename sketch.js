@@ -21,17 +21,20 @@ function draw() {
 
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
-    pipes[i].update();
+    
+    if(bird.alive){
+      pipes[i].update();
 
-    if (pipes[i].hits(bird)) {
-      console.log("HIT");
+      if (pipes[i].hits(bird)) {
+        console.log("HIT");
+      }
+
+      if (pipes[i].offscreen()) {
+        pipes.splice(i, 1);
+      }
     }
-
-    if (pipes[i].offscreen()) {
-      pipes.splice(i, 1);
-    }
-
   }
+
 
   bird.update();
   bird.show();
@@ -45,7 +48,21 @@ function draw() {
 
 // Aqui e onde devem identificar a tecla que querem usar e a respetiva ação
 function keyPressed() {
-  if (key == ' ') {
-    bird.up();
+  if(bird.alive){
+    if (key == ' ') {
+      bird.up();
+    }
   }
+  
+  /*
+  does not work yet
+   
+  if(key == 'p'){
+    // começar novo jogo
+    // soluçao provisoria
+    console.log("p pressed");
+    bird.alive = true;
+  }
+  */
+
 }

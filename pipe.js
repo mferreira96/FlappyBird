@@ -37,20 +37,11 @@ class Pipe {
        else {
         this.highlight = false;
       }
-/*
-      if (bird.y < this.top || bird.y > height - this.bottom) {
-        if (bird.x > this.x && bird.x < this.x + this.w) {
-          this.highlight = true;
-          return true;
-        }
-      }
 
-      this.highlight = false;
-      return false;
-  */
-
-      if(this.highlight)
+      if(this.highlight){
+        bird.dead();
         return true;
+      }
       else 
         return false;  
     }

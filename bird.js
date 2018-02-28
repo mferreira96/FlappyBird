@@ -9,6 +9,7 @@ class Bird {
       this.gravity = 0.6;
       this.lift = -15;
       this.velocity = 0;
+      this.alive= true;
     }
 
     show() {
@@ -24,7 +25,7 @@ class Bird {
       this.velocity += this.gravity;
       this.velocity *= 0.9;
       this.y += this.velocity;
-  
+
       if (this.y + this.radius > height) {
         this.y = height - this.radius;
         this.velocity = 0;
@@ -38,7 +39,7 @@ class Bird {
     }
 
     dead() {
-
+      this.alive = false;
     }
   
   }
