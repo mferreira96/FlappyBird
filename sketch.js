@@ -1,6 +1,6 @@
 
 var bird;
-var pipes = [];
+var pipes;
 
 // ['started', 'paused', 'ended']
 let state_of_game = 'ended';
@@ -10,8 +10,7 @@ function setup() {
   var canvas = createCanvas(windowWidth,windowHeight * 0.95);
   canvas.parent('game_screen'); //set his parent
 
-  bird = new Bird();
-  pipes.push(new Pipe());
+  newGame();
 }
 
 function windowResized() {
@@ -21,12 +20,29 @@ function windowResized() {
 
 function startGame() {
   state_of_game = 'started'; 
+
+  $('#play_button').text('Pause'); 
+  $('#play_button').removeClass('focus');
 }
 
 function pauseGame(){
   state_of_game = 'paused';
+  $('#play_button').text('Play');
+  $('#play_button').removeClass('focus');
 }
 
+function endGame(){
+  state_of_game = 'ended';
+}
+
+function newGame(){
+  bird = new Bird();
+
+  pipes = [];
+  pipes.push(new Pipe());
+
+  startGame();
+}
 
 // onde devem chamar as funcoes para desenhar e atualizar
 function draw() {
@@ -35,23 +51,28 @@ function draw() {
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
     
-    if(bird.alive){
+    if(state_of_game == 'started'){
       pipes[i].update();
+
+      if(pipes[i].hits(bird)){
+        endGame();
+      }
 
       if (pipes[i].offscreen()) {
         pipes.splice(i, 1);
       }
-    } else {
-      state_of_game = 'ended';
+    } 
+  }
+
+  if(state_of_game != 'paused'){
+    bird.update();
+
+    if (frameCount % 100 == 0) {
+      pipes.push(new Pipe());
     }
   }
-
-  bird.update();
+  
   bird.show();
-
-  if (frameCount % 100 == 0) {
-    pipes.push(new Pipe());
-  }
 
 }
 
@@ -68,7 +89,15 @@ function keyPressed() {
 
 $('#play_button').on('click', function(){
 
-  var actual_name = document.getElementById("play_button");
+  var button_text = $('#play_button').text();
 
-  console.log(actual_name);
+  if(button_text == "Pause"){  
+    pauseGame();
+  
+  } else if(button_text == "Play"){
+    startGame();
+  
+  }
 });
+
+
