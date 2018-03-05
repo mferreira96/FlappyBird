@@ -21,14 +21,10 @@ function windowResized() {
 function startGame() {
   state_of_game = 'started'; 
 
-  $('#play_button').text('Pause'); 
-  $('#play_button').removeClass('focus');
 }
 
 function pauseGame(){
   state_of_game = 'paused';
-  $('#play_button').text('Play');
-  $('#play_button').removeClass('focus');
 }
 
 function endGame(){
@@ -40,6 +36,8 @@ function newGame(){
 
   pipes = [];
   pipes.push(new Pipe());
+
+  frameCount = 0;
 
   startGame();
 }
@@ -81,23 +79,22 @@ function keyPressed() {
   if(state_of_game == 'started'){
     if (key == ' ') {
       bird.up();
+    }else if (keyCode === ESCAPE){
+      console.log('p was pressed to pause the game');
+      pauseGame();
+    }
+  } else if (state_of_game == 'paused'){
+    if (keyCode === ESCAPE){
+      console.log('p was pressed to restart the game');
+      startGame();
+    }
+  } else if (state_of_game == 'ended'){
+    if (keyCode == 78){
+      console.log('n was pressed to start a new game');    
+      newGame();
     }
   }
 }
 
-// Actions of the button
-
-$('#play_button').on('click', function(){
-
-  var button_text = $('#play_button').text();
-
-  if(button_text == "Pause"){  
-    pauseGame();
-  
-  } else if(button_text == "Play"){
-    startGame();
-  
-  }
-});
 
 
