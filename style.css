@@ -8,11 +8,3 @@ body {
 canvas {
     display: block;
 }  
-
-#play_button {
-    margin-left: 5%;
-    background-color: green;
-    margin-top: 0.5%;
-    border-color: green;
-    
-}

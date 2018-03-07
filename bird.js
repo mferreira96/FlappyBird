@@ -2,7 +2,7 @@ class Bird {
 
     constructor(){
       this.y = height/2;
-      this.x = 64;
+      this.x = width/4;
       this.diameter = 32
       this.radius = this.diameter / 2;
 
@@ -27,13 +27,15 @@ class Bird {
       this.y += this.velocity;
 
       if (this.y + this.radius > height) {
+        this.dead();
         this.y = height - this.radius;
-        this.velocity = 0;
-      }
+        //this.velocity = 0;
+        }
   
       if (this.y  - this.radius < 0) {
         this.y = this.radius;
-        this.velocity = 0;
+        //this.velocity = 0;
+        this.dead();  
       }
   
     }

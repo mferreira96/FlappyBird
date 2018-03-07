@@ -5,13 +5,15 @@ var pipes;
 // ['started', 'paused', 'ended', 'newGame']
 let state_of_game;
 
-let myFrameCount = 0;
+let output_state;
+
+let myFrameCount;
 
 function setup() {
   var canvas = createCanvas(windowWidth,windowHeight);
   canvas.parent('game_screen'); //set his parent
 
-  $('myModal').modal('show');
+  myFrameCount = 0;
   newGame();
 }
 
@@ -21,17 +23,18 @@ function windowResized() {
 
 
 function startGame() {
-  state_of_game = 'started'; 
-  running = true;
+  state_of_game = 'started';
+  output_state = ""; 
 }
 
 function pauseGame(){
   state_of_game = 'paused';
+  output_state = "PAUSE";
 }
 
 function endGame(){
   state_of_game = 'ended';
-  running = false;
+  output_state = "GAME OVER";
 }
 
 function newGame(){
@@ -43,6 +46,7 @@ function newGame(){
   frameCount = 0;
 
   state_of_game = 'newGame';
+  output_state = "START";
 }
 
 // onde devem chamar as funcoes para desenhar e atualizar
@@ -56,7 +60,9 @@ function draw() {
     if(state_of_game == 'started'){
       pipes[i].update();
 
-      if(pipes[i].hits(bird)){
+      pipes[i].hits(bird);
+      
+      if(!bird.alive){
         endGame();
       }
 
@@ -74,7 +80,16 @@ function draw() {
     }
 
   }
-  
+
+  textSize(32);
+  fill(0);
+  text('Score: ' + Math.floor(myFrameCount/100),30,30);
+
+
+  textSize(width/10);
+  var x = (width - textWidth(output_state)) / 2; 
+  text(output_state,x,height/2);
+
   bird.show();
 
 }
@@ -91,19 +106,16 @@ function keyPressed() {
       if (key == ' ') {
           bird.up();
       }else if (keyCode === ESCAPE){
-        console.log('p was pressed to pause the game');
         pauseGame();
       }
       break;
     case 'paused':
       if (keyCode === ESCAPE){
-        console.log('p was pressed to restart the game');
         startGame();
       }
       break;
     case 'ended':  
-      if (keyCode == 78){
-        console.log('n was pressed to start a new game');    
+      if (keyCode == 78){    
         newGame();
       }
       break;
@@ -121,7 +133,6 @@ function updateFrameCount(){
     case 'paused':
       break;
     case 'ended':
-      myFrameCount = 0;
       break;
     case 'newGame':
       myFrameCount = 0;
