@@ -8,7 +8,7 @@ let state_of_game;
 let myFrameCount = 0;
 
 function setup() {
-  var canvas = createCanvas(windowWidth,windowHeight * 0.95);
+  var canvas = createCanvas(windowWidth,windowHeight);
   canvas.parent('game_screen'); //set his parent
 
   newGame();
@@ -109,29 +109,7 @@ function keyPressed() {
     default:
       break;
   }
-  /*
-  if(state_of_game == 'started'){
-    if (key == ' ') {
-      if(!running)
-        startGame();
-      else  
-        bird.up();
-    }else if (keyCode === ESCAPE){
-      console.log('p was pressed to pause the game');
-      pauseGame();
-    }
-  } else if (state_of_game == 'paused'){
-    if (keyCode === ESCAPE){
-      console.log('p was pressed to restart the game');
-      startGame();
-    }
-  } else if (state_of_game == 'ended'){
-    if (keyCode == 78){
-      console.log('n was pressed to start a new game');    
-      newGame();
-    }
-  }
-  */
+
 }
 
 function updateFrameCount(){

@@ -3,17 +3,11 @@ body {
     padding: 0;
     overflow-y: hidden;
     overflow-x: hidden;
-    overflow: auto;
   }
   
 canvas {
     display: block;
 }  
-
-#controller{
-    height: 5%;
-    background-color: slategrey;
-}
 
 #play_button {
     margin-left: 5%;
