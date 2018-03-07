@@ -1,15 +1,5 @@
 # Flappy Bird
 
-## Melhorias
-
- - [ ] Adicionar Score
- - [x] Melhorar escolha do tamanho dos pipes
- - [x] Melhorar verificação relativamente a se o pássaro bateu ou não no tubo
- - [x] Criar um fundo mais bonito
- - [x] End game
- - [x] Add buttons
-
-
  ## Manual
 
   To start the game press **SPACE**  
