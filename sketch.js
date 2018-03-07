@@ -11,6 +11,7 @@ function setup() {
   var canvas = createCanvas(windowWidth,windowHeight);
   canvas.parent('game_screen'); //set his parent
 
+  $('myModal').modal('show');
   newGame();
 }
 
